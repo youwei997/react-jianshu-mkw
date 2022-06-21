@@ -1,10 +1,15 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
+// import React from "react";
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+// react 18的挂在dom方式
+import ReactDOM from "react-dom/client";
+
+import TodoList from "./TodoList";
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<TodoList />);
+
+// 旧的
+// ReactDOM.render(
+//   <App />,
+//   document.getElementById("root")
+// );
