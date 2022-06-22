@@ -6,10 +6,12 @@ export default class TodoItem extends Component {
     this.handleClick = this.handleClick.bind(this);
   }
   render() {
-    return <div onClick={this.handleClick}>{this.props.item}</div>;
+    const { item } = this.props;
+    return <div onClick={this.handleClick}>{item}</div>;
   }
   handleClick() {
     // 调用父组件传递的方法
-    this.props.deleteItem(this.props.index);
+    const { deleteItem, index } = this.props;
+    deleteItem(index);
   }
 }
