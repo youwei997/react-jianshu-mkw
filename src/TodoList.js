@@ -3,6 +3,9 @@ import React, { Fragment } from "react";
 // 引入css
 import "./style.css";
 
+// 引入组件
+import TodoItem from "./TodoItem";
+
 class TodoList extends React.Component {
   // 一个类就一定有一个constructor构造函数
   // 最优先执行的函数
@@ -71,11 +74,19 @@ class TodoList extends React.Component {
           */}
           {this.state.list.map((item, index) => {
             return (
-              <li
+              <div>
+                <TodoItem
+                  item={item}
+                  index={index}
+                  // 更改this指向为父组件，要不然把方法传递给子组件，在自己调不了传递的方法
+                  deleteItem={this.handleDelete.bind(this)}
+                ></TodoItem>
+                {/* <li
                 key={index}
                 onClick={this.handleDelete.bind(this, index)}
                 dangerouslySetInnerHTML={{ __html: item }}
-              ></li>
+              ></li> */}
+              </div>
             );
           })}
         </ul>
