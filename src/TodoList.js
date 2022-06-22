@@ -1,5 +1,8 @@
 import React, { Fragment } from "react";
 
+// 引入css
+import "./style.css";
+
 class TodoList extends React.Component {
   // 一个类就一定有一个constructor构造函数
   // 最优先执行的函数
@@ -10,7 +13,7 @@ class TodoList extends React.Component {
     // 必须得写这一句
     this.state = {
       inputValue: "",
-      list: ["react", "vue"],
+      list: ["react", "vue", "<h1>angular</h1>"],
     };
   }
 
@@ -44,22 +47,35 @@ class TodoList extends React.Component {
 
   render() {
     return (
-      // Fragment占位标签，不渲染到dom上，类似vue中的template
+      // Fragment占位标签，也是一个react组件，不渲染到dom上，类似vue中的template
       <Fragment>
+        {/* 测试react注释，必须得在外面包花括号，花括号里写的是js表达式 */}
         <div>TodoList</div>
         <div>
+          {/* htmlFor 等同于原生label的for， insertArea为某个元素的id  */}
+          <label htmlFor="insertArea">使用label扩大input的点击范围</label>
+          {/* react jsx 语法中，标签的class改为className，class在react中会认为是class类 */}
           <input
+            id="insertArea"
+            className="input"
             value={this.state.inputValue}
             onChange={this.handleInputChange.bind(this)}
           />
           <button onClick={this.handleSubmit.bind(this)}>提交</button>
         </div>
         <ul>
+          {/* 
+          dangerouslySetInnerHTML 代表使用原生html， 类似vue的v-html
+          {{ __html: item }} 第一个为表达式花括号(规定语法)， 里面的是对象
+          dangerouslySetInnerHTML={{ __html: item }}
+          */}
           {this.state.list.map((item, index) => {
             return (
-              <li key={index} onClick={this.handleDelete.bind(this, index)}>
-                {item}
-              </li>
+              <li
+                key={index}
+                onClick={this.handleDelete.bind(this, index)}
+                dangerouslySetInnerHTML={{ __html: item }}
+              ></li>
             );
           })}
         </ul>
