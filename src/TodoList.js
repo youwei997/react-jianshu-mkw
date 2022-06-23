@@ -12,6 +12,7 @@ class TodoList extends React.Component {
   constructor(props) {
     // 调用父类构造函数
     super(props);
+    // 当组件的state或者props发生改变时，render函数就会重新执行
     // 组件的状态
     // 必须得写这一句
     this.state = {
@@ -26,6 +27,8 @@ class TodoList extends React.Component {
   }
 
   render() {
+    // render函数每次执行，就会从state或者props里拿数据，并渲染到页面上
+    console.log('当组件的state或者props发生改变时，render函数就会重新执行')
     return (
       // Fragment占位标签，也是一个react组件，不渲染到dom上，类似vue中的template
       <Fragment>
@@ -44,7 +47,7 @@ class TodoList extends React.Component {
           <button onClick={this.handleSubmit}>提交</button>
         </div>
         <ul>
-          {/* 
+          {/*
           dangerouslySetInnerHTML 代表使用原生html， 类似vue的v-html
           {{ __html: item }} 第一个为表达式花括号(规定语法)， 里面的是对象
           dangerouslySetInnerHTML={{ __html: item }}
@@ -59,6 +62,7 @@ class TodoList extends React.Component {
   getTodoItem() {
     return this.state.list.map((item, index) => {
       return (
+          // 父组件render函数执行时，子组件的render都会被重新运行
         // key值必须放在最外层的元素上
         <div key={index}>
           <TodoItem
