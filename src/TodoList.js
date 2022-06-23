@@ -9,6 +9,7 @@ import TodoItem from "./TodoItem";
 class TodoList extends React.Component {
   // 一个类就一定有一个constructor构造函数
   // 最优先执行的函数
+  // 初始化函数（初始化props和state）
   constructor(props) {
     // 调用父类构造函数
     super(props);
@@ -17,7 +18,7 @@ class TodoList extends React.Component {
     // 必须得写这一句
     this.state = {
       inputValue: "",
-      list: ["react", "vue", "<h1>angular</h1>"],
+      list: [],
     };
 
     // 绑定this的操作优先放在constructor里
@@ -26,9 +27,16 @@ class TodoList extends React.Component {
     this.handleDelete = this.handleDelete.bind(this);
   }
 
+  // 在组件被挂载到页面之前自动执行
+  // 只会在第一次执行
+  componentWillMount() {
+    // console.log('componentWillMount 在组件被挂载到页面之前自动执行 只会在第一次执行')
+  }
+
   render() {
     // render函数每次执行，就会从state或者props里拿数据，并渲染到页面上
     // console.log('当组件的state或者props发生改变时，render函数就会重新执行')
+    console.log("父组件render");
     return (
       // Fragment占位标签，也是一个react组件，不渲染到dom上，类似vue中的template
       <Fragment>
@@ -43,7 +51,7 @@ class TodoList extends React.Component {
             className="input"
             value={this.state.inputValue}
             onChange={this.handleInputChange}
-            ref={(input)=>(this.input = input)}
+            ref={(input) => (this.input = input)}
           />
           <button onClick={this.handleSubmit}>提交</button>
         </div>
@@ -59,11 +67,38 @@ class TodoList extends React.Component {
     );
   }
 
+  // 在组件被挂载到页面之后自动执行
+  // 只会在第一次执行
+  // 适合发送ajax请求
+  componentDidMount() {
+    // console.log('componentDidMount 在组件被挂载到页面之后自动执行 只会在第一次执行')
+  }
+
+  // 组件被更新之前自动执行
+  shouldComponentUpdate(nextProps, nextState, nextContext) {
+    // console.log(nextProps, nextState, nextContext)
+    // 返回true说明组件数据需要被更新，false就是不需要更新（input输入框就不会改变）
+    // 返回false 后面的几个生命周期函数就都不会执行（componentWillUpdate --> render --> componentDidUpdate）
+    // console.log("shouldComponentUpdate");
+    return true;
+  }
+
+  // 组件被更新之前自动执行，但是它在shouldComponentUpdate之后被执行，render之前
+  // shouldComponentUpdate返回true它才执行，否则不执行
+  componentWillUpdate(nextProps, nextState, nextContext) {
+    // console.log("componentWillUpdate");
+  }
+
+  // 组件更新完成之后执行，render之后
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    // console.log("componentDidUpdate");
+  }
+
   // TodoItem
   getTodoItem() {
     return this.state.list.map((item, index) => {
       return (
-          // 父组件render函数执行时，子组件的render都会被重新运行
+        // 父组件render函数执行时，子组件的render都会被重新运行
         // key值必须放在最外层的元素上
         <div key={index}>
           <TodoItem
@@ -89,14 +124,17 @@ class TodoList extends React.Component {
     // e.target 就是一个dom节点
     // 使用函数返回形式，和下面的效果一致
     const value = e.target.value;
-    this.setState(() => {
-      return {
-        inputValue: value,
-      };
-    },()=>{
-      // setState 的回调函数， setState异步的执行完成， 可以在这里有操作dom等
-      console.log('setState 的回调函数， setState异步的执行完成')
-    });
+    this.setState(
+      () => {
+        return {
+          inputValue: value,
+        };
+      },
+      () => {
+        // setState 的回调函数， setState异步的执行完成， 可以在这里有操作dom等
+        // console.log('setState 的回调函数， setState异步的执行完成')
+      }
+    );
 
     // this.setState({
     //   inputValue: e.target.value,
