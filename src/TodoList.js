@@ -28,7 +28,7 @@ class TodoList extends React.Component {
 
   render() {
     // render函数每次执行，就会从state或者props里拿数据，并渲染到页面上
-    console.log('当组件的state或者props发生改变时，render函数就会重新执行')
+    // console.log('当组件的state或者props发生改变时，render函数就会重新执行')
     return (
       // Fragment占位标签，也是一个react组件，不渲染到dom上，类似vue中的template
       <Fragment>
@@ -43,6 +43,7 @@ class TodoList extends React.Component {
             className="input"
             value={this.state.inputValue}
             onChange={this.handleInputChange}
+            ref={(input)=>(this.input = input)}
           />
           <button onClick={this.handleSubmit}>提交</button>
         </div>
@@ -83,12 +84,18 @@ class TodoList extends React.Component {
 
   // input事件
   handleInputChange(e) {
+    //在input标签上使用ref， 这样this.input 就是input的dom
+    // console.log(this.input)
+    // e.target 就是一个dom节点
     // 使用函数返回形式，和下面的效果一致
     const value = e.target.value;
     this.setState(() => {
       return {
         inputValue: value,
       };
+    },()=>{
+      // setState 的回调函数， setState异步的执行完成， 可以在这里有操作dom等
+      console.log('setState 的回调函数， setState异步的执行完成')
     });
 
     // this.setState({

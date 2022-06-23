@@ -8,7 +8,7 @@ export default class TodoItem extends Component {
     this.handleClick = this.handleClick.bind(this);
   }
   render() {
-    console.log('TodoItem 父组件传递的props发生改变')
+    // console.log('TodoItem 父组件传递的props发生改变')
     const { item, test } = this.props;
     return (
       <div onClick={this.handleClick}>
