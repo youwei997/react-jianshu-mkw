@@ -22,6 +22,8 @@ class TodoList extends React.Component {
     };
 
     // 绑定this的操作优先放在constructor里
+    // 绑定this用于在方法中获取组件this，比如方法中使用this.setState。
+    // 不绑定this，方法中this为undefined，也就无法setState等组件相关的方法
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
