@@ -6,7 +6,7 @@ import TodoList from "./TodoList";
 import ReactDOM from "react-dom/client";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<TodoList />);
+// root.render(<TodoList />);
 
 // react18 之前
 // import ReactDOM from "react-dom";
