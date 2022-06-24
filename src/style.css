@@ -3,6 +3,25 @@
     transition: all 1s ease-in;
 }
 .hide{
-    opacity: 0;
-    transition: all 1s ease-in;
+    /*opacity: 0;*/
+    /*transition: all 1s ease-in;*/
+    /* forwards 保存状态，如果不加forwards，动画最后的opacity:0执行完，元素还是会显示 */
+    animation: hide-item 2s ease-in forwards;
+}
+
+@keyframes hide-item {
+    0%{
+        opacity: 1;
+        color :red;
+    }
+
+    50%{
+        opacity: 0.5;
+        color: green;
+    }
+
+    100%{
+        opacity: 0;
+        color: blue;
+    }
 }
