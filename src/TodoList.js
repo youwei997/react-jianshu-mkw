@@ -4,11 +4,17 @@ import { Input, Button, List } from "antd";
 
 import store from "./store";
 
+// import {
+//   CHANGE_INPUT_VALUE,
+//   ADD_TODO_ITEM,
+//   DELETE_TODO_ITEM,
+// } from "./store/actionTypes";
+
 import {
-  CHANGE_INPUT_VALUE,
-  ADD_TODO_ITEM,
-  DELETE_TODO_ITEM,
-} from "./store/actionTypes";
+  getInputChangeAction,
+  getAddItemAction,
+  getDeleteItemAction,
+} from "./store/actionCreators";
 
 // 函数式组件
 // const App = () => {
@@ -58,33 +64,37 @@ export default class TodoList extends Component {
   // input事件
   handleInputChange(e) {
     // 创建一个action 里面必须要有type（描述，描述你这个action要做什么）
-    const action = {
-      type: CHANGE_INPUT_VALUE,
-      value: e.target.value,
-    };
+    // const action = {
+    //   type: CHANGE_INPUT_VALUE,
+    //   value: e.target.value,
+    // };
+    // getInputChangeAction 返回一个action对象
+    const action = getInputChangeAction(e.target.value);
     store.dispatch(action);
   }
 
   // 订阅store的方法
   handleStoreChange() {
-    // 把reducer返回的新store数据存入到state，页面就改变
+    // 把reducer返回的newState数据存入到state，页面就改变
     this.setState(store.getState());
   }
 
   // 提交事件
   handleBtnClick(e) {
-    const action = {
-      type: ADD_TODO_ITEM,
-    };
+    // const action = {
+    //   type: ADD_TODO_ITEM,
+    // };
+    const action = getAddItemAction();
     store.dispatch(action);
   }
 
   // item 删除事件
   handleItemDelete(index) {
-    const action = {
-      type: DELETE_TODO_ITEM,
-      index: index,
-    };
+    // const action = {
+    //   type: DELETE_TODO_ITEM,
+    //   index: index,
+    // };
+    const action = getDeleteItemAction(index);
     store.dispatch(action);
   }
 }
