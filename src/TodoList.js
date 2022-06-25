@@ -4,6 +4,12 @@ import { Input, Button, List } from "antd";
 
 import store from "./store";
 
+import {
+  CHANGE_INPUT_VALUE,
+  ADD_TODO_ITEM,
+  DELETE_TODO_ITEM,
+} from "./store/actionTypes";
+
 // 函数式组件
 // const App = () => {
 //   return <Input placeholder="Basic usage" />;
@@ -35,20 +41,25 @@ export default class TodoList extends Component {
         </Button>
 
         <List
-          header={<div>Header</div>}
-          footer={<div>Footer</div>}
+          // header={<div>Header</div>}
+          // footer={<div>Footer</div>}
           bordered
           dataSource={this.state.list}
-          renderItem={(item) => <List.Item>{item}</List.Item>}
+          renderItem={(item, index) => (
+            <List.Item onClick={this.handleItemDelete.bind(this, index)}>
+              {item}
+            </List.Item>
+          )}
         />
       </Fragment>
     );
   }
 
+  // input事件
   handleInputChange(e) {
     // 创建一个action 里面必须要有type（描述，描述你这个action要做什么）
     const action = {
-      type: "change_input_value",
+      type: CHANGE_INPUT_VALUE,
       value: e.target.value,
     };
     store.dispatch(action);
@@ -60,9 +71,19 @@ export default class TodoList extends Component {
     this.setState(store.getState());
   }
 
+  // 提交事件
   handleBtnClick(e) {
     const action = {
-      type: "add_todo_item",
+      type: ADD_TODO_ITEM,
+    };
+    store.dispatch(action);
+  }
+
+  // item 删除事件
+  handleItemDelete(index) {
+    const action = {
+      type: DELETE_TODO_ITEM,
+      index: index,
     };
     store.dispatch(action);
   }
