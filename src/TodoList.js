@@ -13,7 +13,10 @@ import {
   getInputChangeAction,
   getAddItemAction,
   getDeleteItemAction,
+  initListAction,
 } from "./store/actionCreators";
+
+import axios from "axios";
 
 // 引入ui式组件
 import TodoListUI from "./TodoListUI";
@@ -47,6 +50,14 @@ export default class TodoList extends Component {
         handleItemDelete={this.handleItemDelete}
       />
     );
+  }
+
+  componentDidMount() {
+    axios.get("http://localhost:3001/TodoList").then((res) => {
+      const { data } = res.data;
+      const action = initListAction(data);
+      store.dispatch(action);
+    });
   }
 
   // input事件

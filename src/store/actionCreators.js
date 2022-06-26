@@ -3,6 +3,7 @@ import {
   CHANGE_INPUT_VALUE,
   ADD_TODO_ITEM,
   DELETE_TODO_ITEM,
+  INIT_LIST_ACTION,
 } from "./actionTypes";
 
 // 返回CHANGE_INPUT_VALUE 的action
@@ -25,5 +26,13 @@ export const getDeleteItemAction = (index) => {
   return {
     type: DELETE_TODO_ITEM,
     index,
+  };
+};
+
+// axios请求的list
+export const initListAction = (data) => {
+  return {
+    type: INIT_LIST_ACTION,
+    data,
   };
 };
