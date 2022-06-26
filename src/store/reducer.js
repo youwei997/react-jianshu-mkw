@@ -38,7 +38,9 @@ const reducer = (state = defaultState, action) => {
   // item删除的action
   if (action.type === DELETE_TODO_ITEM) {
     const newState = JSON.parse(JSON.stringify(state));
-    newState.list.splice(newState.index, 1);
+    // 传进来的下标存在时
+    if (!action.index) return;
+    newState.list.splice(action.index, 1);
     return newState;
   }
   return state;

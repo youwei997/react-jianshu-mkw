@@ -1,6 +1,5 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import "./App.css";
-import { Input, Button, List } from "antd";
 
 import store from "./store";
 
@@ -16,6 +15,9 @@ import {
   getDeleteItemAction,
 } from "./store/actionCreators";
 
+// 引入ui式组件
+import TodoListUI from "./TodoListUI";
+
 // 函数式组件
 // const App = () => {
 //   return <Input placeholder="Basic usage" />;
@@ -30,34 +32,20 @@ export default class TodoList extends Component {
     this.state = store.getState();
     this.handleStoreChange = this.handleStoreChange.bind(this);
     this.handleBtnClick = this.handleBtnClick.bind(this);
+    this.handleItemDelete = this.handleItemDelete.bind(this);
 
     // 订阅store，不加这个，store改变，页面也不会改变
     store.subscribe(this.handleStoreChange);
   }
   render() {
     return (
-      <Fragment>
-        <Input
-          placeholder="Todo Info"
-          value={this.state.inputValue}
-          onChange={this.handleInputChange}
-        />
-        <Button type="primary" onClick={this.handleBtnClick}>
-          提交
-        </Button>
-
-        <List
-          // header={<div>Header</div>}
-          // footer={<div>Footer</div>}
-          bordered
-          dataSource={this.state.list}
-          renderItem={(item, index) => (
-            <List.Item onClick={this.handleItemDelete.bind(this, index)}>
-              {item}
-            </List.Item>
-          )}
-        />
-      </Fragment>
+      <TodoListUI
+        inputValue={this.state.inputValue}
+        list={this.state.list}
+        handleInputChange={this.handleInputChange}
+        handleBtnClick={this.handleBtnClick}
+        handleItemDelete={this.handleItemDelete}
+      />
     );
   }
 
@@ -89,11 +77,12 @@ export default class TodoList extends Component {
   }
 
   // item 删除事件
-  handleItemDelete(index) {
+  handleItemDelete(e) {
     // const action = {
     //   type: DELETE_TODO_ITEM,
     //   index: index,
     // };
+    const { index } = e.target.dataset;
     const action = getDeleteItemAction(index);
     store.dispatch(action);
   }
