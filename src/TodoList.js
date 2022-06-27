@@ -13,7 +13,7 @@ import {
   getInputChangeAction,
   getAddItemAction,
   getDeleteItemAction,
-  initListAction,
+  getTodoList,
 } from "./store/actionCreators";
 
 import axios from "axios";
@@ -53,11 +53,9 @@ export default class TodoList extends Component {
   }
 
   componentDidMount() {
-    axios.get("http://localhost:3001/TodoList").then((res) => {
-      const { data } = res.data;
-      const action = initListAction(data);
-      store.dispatch(action);
-    });
+    const action = getTodoList();
+    // 调用 store.dispatch(action)时 action也就是getTodoList返回的函数会自动执行
+    store.dispatch(action);
   }
 
   // input事件

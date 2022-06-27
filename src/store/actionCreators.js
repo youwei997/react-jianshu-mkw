@@ -5,6 +5,8 @@ import {
   DELETE_TODO_ITEM,
   INIT_LIST_ACTION,
 } from "./actionTypes";
+import axios from "axios";
+import store from "./index";
 
 // 返回CHANGE_INPUT_VALUE 的action
 export const getInputChangeAction = (value) => {
@@ -34,5 +36,15 @@ export const initListAction = (data) => {
   return {
     type: INIT_LIST_ACTION,
     data,
+  };
+};
+
+export const getTodoList = () => {
+  return (dispatch) => {
+    axios.get("http://localhost:3001/TodoList").then((res) => {
+      const { data } = res.data;
+      const action = initListAction(data);
+      dispatch(action);
+    });
   };
 };
