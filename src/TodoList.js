@@ -13,7 +13,9 @@ import {
   getInputChangeAction,
   getAddItemAction,
   getDeleteItemAction,
-  getTodoList,
+  initListAction,
+  // getTodoList,
+  getInitList,
 } from "./store/actionCreators";
 
 import axios from "axios";
@@ -53,9 +55,15 @@ export default class TodoList extends Component {
   }
 
   componentDidMount() {
-    const action = getTodoList();
-    // 调用 store.dispatch(action)时 action也就是getTodoList返回的函数会自动执行
+    // 使用redux-saga
+    // 不仅reducer能接收到派发的action，saga文件也可以接收到action
+    const action = getInitList();
     store.dispatch(action);
+
+    // redux-thunk中间件
+    // const action = getTodoList();
+    // // 调用 store.dispatch(action)时 action也就是getTodoList返回的函数会自动执行
+    // store.dispatch(action);
   }
 
   // input事件
