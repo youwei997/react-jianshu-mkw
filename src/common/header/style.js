@@ -3,8 +3,14 @@ import logoPic from "../../statics/img/logo.png";
 
 export const HeaderWrapper = styled.div`
   height: 58px;
+  border-bottom: 1px solid #f0f0f0;
+`;
+
+export const WidthLimit = styled.div`
+  margin: 0 auto;
+  min-width: 768px;
+  max-width: 1440px;
   position: relative;
-  border: 1px solid #f0f0f0;
 `;
 
 // attrs 在元素上增加属性
@@ -40,6 +46,9 @@ export const NavItem = styled.div`
   &.right {
     float: right;
     color: #969696;
+    .icon-font-size {
+      font-size: 25px;
+    }
   }
 
   &.active {
@@ -52,7 +61,7 @@ export const NavSearch = styled.input.attrs({
 })`
   width: 240px;
   height: 38px;
-  margin-top: 9px;
+  margin-top: 10px;
   padding: 0 40px 0 20px;
   outline: none;
   box-sizing: border-box;
@@ -60,6 +69,7 @@ export const NavSearch = styled.input.attrs({
   border: 1px solid #eee;
   background: #eee;
   font-size: 14px;
+  margin-left: 50px;
   ::placeholder {
     color: #999;
   }
@@ -67,7 +77,7 @@ export const NavSearch = styled.input.attrs({
 
 export const Addition = styled.div`
   position: absolute;
-  right: 0;
+  right: 30px;
   top: 0;
   height: 56px;
 `;
@@ -89,6 +99,25 @@ export const Button = styled.div`
   }
   &.writing {
     color: #fff;
+    width: 100px;
     background-color: #ec6149;
+    .icon-write {
+      margin-right: 5px;
+    }
+  }
+`;
+
+export const SearchWrapper = styled.div`
+  float: left;
+  position: relative;
+  .icon-sousuo {
+    position: absolute;
+    right: 5px;
+    bottom: 5px;
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    line-height: 30px;
+    text-align: center;
   }
 `;
