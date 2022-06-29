@@ -70,7 +70,10 @@ const Header = (props) => {
 const mapStateToProps = (state) => {
   // state 就是reducer的state
   return {
-    focused: state.header.get("focused"),
+    // getIn 代表从state里 的header 取 focused
+    // 和下面的相等
+    focused: state.getIn(["header", "focused"]),
+    // focused: state.get("header").get("focused"),
   };
 };
 
