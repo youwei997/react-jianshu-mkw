@@ -36,7 +36,8 @@ class Header extends React.Component {
     this.getListArea = this.getListArea.bind(this);
   }
   getListArea() {
-    if (this.props.focused) {
+    const { focused, list } = this.props;
+    if (focused) {
       return (
         <SearchInfo>
           <SearchInfoTitle>
@@ -44,7 +45,7 @@ class Header extends React.Component {
             热门搜索
           </SearchInfoTitle>
           <SearchInfoList>
-            {this.props.list.map((item, index) => {
+            {list.map((item) => {
               return <SearchInfoItem key={item}>{item}</SearchInfoItem>;
             })}
           </SearchInfoList>

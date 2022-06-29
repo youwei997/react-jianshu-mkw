@@ -11,18 +11,16 @@ const defaultState = fromJS({
   list: [],
 });
 const reducer = (state = defaultState, action) => {
-  if (action.type === SEARCH_FOCUS) {
-    // immutable 对象的set方法，会结合之期的immutable对象的值和设置的值，返回一个全新的值
-    return state.set("focused", true);
+  switch (action.type) {
+    case SEARCH_FOCUS:
+      // immutable 对象的set方法，会结合之期的immutable对象的值和设置的值，返回一个全新的值
+      return state.set("focused", true);
+    case SEARCH_BLUR:
+      return state.set("focused", false);
+    case CHANGE_LIST:
+      return state.set("list", fromJS(action.data));
+    default:
+      return state;
   }
-  if (action.type === SEARCH_BLUR) {
-    return state.set("focused", false);
-  }
-
-  if (action.type === CHANGE_LIST) {
-    return state.set("list", fromJS(action.data));
-  }
-
-  return state;
 };
 export default reducer;

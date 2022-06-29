@@ -1,5 +1,14 @@
 import { SEARCH_FOCUS, SEARCH_BLUR, CHANGE_LIST } from "./actionTypes";
 import axios from "axios";
+
+// 热搜列表
+const getHeaderListAction = (data) => {
+  return {
+    type: CHANGE_LIST,
+    data,
+  };
+};
+
 // 搜索框聚焦
 export const getSearchFocusAction = () => {
   return {
@@ -11,14 +20,6 @@ export const getSearchFocusAction = () => {
 export const getSearchBlurAction = () => {
   return {
     type: SEARCH_BLUR,
-  };
-};
-
-// 热搜列表
-export const getHeaderListAction = (data) => {
-  return {
-    type: CHANGE_LIST,
-    data,
   };
 };
 
