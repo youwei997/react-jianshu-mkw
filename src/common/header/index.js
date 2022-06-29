@@ -70,7 +70,7 @@ const Header = (props) => {
 const mapStateToProps = (state) => {
   // state 就是reducer的state
   return {
-    ...state,
+    ...state.header,
   };
 };
 
