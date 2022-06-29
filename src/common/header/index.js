@@ -15,7 +15,7 @@ import {
 } from "./style";
 
 import { CSSTransition } from "react-transition-group";
-import { mapStateToPropsFactory } from "react-redux/es/connect/mapStateToProps";
+import { actionCreators } from "./store";
 
 const Header = (props) => {
   const { focused, handleInputFocus, handleInputBlur } = props;
@@ -77,15 +77,11 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     handleInputFocus() {
-      const action = {
-        type: "search_focus",
-      };
+      const action = actionCreators.getSearchFocusAction();
       dispatch(action);
     },
     handleInputBlur() {
-      const action = {
-        type: "search_blur",
-      };
+      const action = actionCreators.getSearchBlurAction();
       dispatch(action);
     },
   };
