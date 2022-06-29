@@ -12,10 +12,38 @@ import {
   Button,
   WidthLimit,
   SearchWrapper,
+  SearchInfo,
+  SearchInfoTitle,
+  SearchInfoSwitch,
+  SearchInfoItem,
+  SearchInfoList,
 } from "./style";
 
 import { CSSTransition } from "react-transition-group";
 import { actionCreators } from "./store";
+
+const getListArea = (show) => {
+  if (show) {
+    return (
+      <SearchInfo>
+        <SearchInfoTitle>
+          <SearchInfoSwitch>换一批</SearchInfoSwitch>
+          热门搜索
+        </SearchInfoTitle>
+        <SearchInfoList>
+          <SearchInfoItem>教育</SearchInfoItem>
+          <SearchInfoItem>教育</SearchInfoItem>
+          <SearchInfoItem>教育</SearchInfoItem>
+          <SearchInfoItem>教育</SearchInfoItem>
+          <SearchInfoItem>教育</SearchInfoItem>
+          <SearchInfoItem>教育</SearchInfoItem>
+        </SearchInfoList>
+      </SearchInfo>
+    );
+  } else {
+    return null;
+  }
+};
 
 const Header = (props) => {
   const { focused, handleInputFocus, handleInputBlur } = props;
@@ -45,6 +73,7 @@ const Header = (props) => {
                   : "iconfont icon-sousuo"
               }
             ></i>
+            {getListArea(focused)}
           </SearchWrapper>
         </Nav>
         <Addition>
