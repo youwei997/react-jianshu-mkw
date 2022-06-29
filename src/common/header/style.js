@@ -172,6 +172,19 @@ export const SearchInfoTitle = styled.div`
 export const SearchInfoSwitch = styled.span`
   float: right;
   font-size: 13px;
+  .icon-spin {
+    display: block;
+    float: left;
+    //height: 20px;
+    //width: 20px;
+    //text-align: center;
+    //line-height: 20px;
+    font-size: 13px;
+    margin-right: 5px;
+    transition: all 0.2s ease-in
+    //transform: rotate(90deg);
+    transform-origin: center center;
+  }
 `;
 
 export const SearchInfoItem = styled.a`

@@ -32,7 +32,9 @@ import { actionCreators } from "./store";
 class Header extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      rotate: 0,
+    };
     this.getListArea = this.getListArea.bind(this);
   }
   getListArea() {
@@ -66,10 +68,12 @@ class Header extends React.Component {
           <SearchInfoTitle>
             <SearchInfoSwitch
               // 必须使用箭头函数调用，不写箭头函数直接传参 onClick={handleChangePage(page, totalPages)} 这样就默认会调用
-              onClick={() => {
-                handleChangePage(page, totalPages);
-              }}
+              onClick={handleChangePage.bind(this, page, totalPages)}
             >
+              <i
+                style={{ transform: "rotate(" + this.state.rotate + "deg)" }}
+                className="iconfont icon-spin"
+              ></i>
               换一批
             </SearchInfoSwitch>
             热门搜索
@@ -157,6 +161,12 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(actionCreators.getMouseLeaveAction());
     },
     handleChangePage(page, totalPages) {
+      // 这里没用课程的ref加原生设置样式的写法
+      // 有问题看 7-15换页旋转动画效果的实现
+      const newRotate = (this.state.rotate += 360);
+      this.setState({
+        rotate: newRotate,
+      });
       let currentPage = page === totalPages ? 1 : page + 1;
       dispatch(actionCreators.getChangePageAction(currentPage));
     },
