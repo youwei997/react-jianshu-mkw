@@ -36,19 +36,45 @@ class Header extends React.Component {
     this.getListArea = this.getListArea.bind(this);
   }
   getListArea() {
-    const { focused, list } = this.props;
-    if (focused) {
+    const {
+      focused,
+      list,
+      page,
+      mouseIn,
+      totalPages,
+      handleMouseEnter,
+      handleMouseLeave,
+      handleChangePage,
+    } = this.props;
+    if (focused || mouseIn) {
+      const newList = list.toJS(list);
+      const pageList = [];
+      if (newList.length === 0) {
+        return;
+      }
+      for (let i = (page - 1) * 10; i < page * 10; i++) {
+        pageList.push(
+          <SearchInfoItem key={newList[i]}>{newList[i]}</SearchInfoItem>
+        );
+      }
+
       return (
-        <SearchInfo>
+        <SearchInfo
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
           <SearchInfoTitle>
-            <SearchInfoSwitch>换一批</SearchInfoSwitch>
+            <SearchInfoSwitch
+              // 必须使用箭头函数调用，不写箭头函数直接传参 onClick={handleChangePage(page, totalPages)} 这样就默认会调用
+              onClick={() => {
+                handleChangePage(page, totalPages);
+              }}
+            >
+              换一批
+            </SearchInfoSwitch>
             热门搜索
           </SearchInfoTitle>
-          <SearchInfoList>
-            {list.map((item) => {
-              return <SearchInfoItem key={item}>{item}</SearchInfoItem>;
-            })}
-          </SearchInfoList>
+          <SearchInfoList>{pageList}</SearchInfoList>
         </SearchInfo>
       );
     } else {
@@ -108,6 +134,9 @@ const mapStateToProps = (state) => {
     // focused: state.get("header").get("focused"),
 
     list: state.getIn(["header", "list"]),
+    page: state.getIn(["header", "page"]),
+    mouseIn: state.getIn(["header", "mouseIn"]),
+    totalPages: state.get("header").get("totalPages"),
   };
 };
 
@@ -120,6 +149,16 @@ const mapDispatchToProps = (dispatch) => {
     handleInputBlur() {
       const action = actionCreators.getSearchBlurAction();
       dispatch(action);
+    },
+    handleMouseEnter() {
+      dispatch(actionCreators.getMouseEnterAction());
+    },
+    handleMouseLeave() {
+      dispatch(actionCreators.getMouseLeaveAction());
+    },
+    handleChangePage(page, totalPages) {
+      let currentPage = page === totalPages ? 1 : page + 1;
+      dispatch(actionCreators.getChangePageAction(currentPage));
     },
   };
 };
