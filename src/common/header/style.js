@@ -73,6 +73,28 @@ export const NavSearch = styled.input.attrs({
   &::placeholder {
     color: #999;
   }
+
+  &.focused {
+    width: 300px;
+  }
+
+  &.slide-enter {
+    //width: 300px;
+    transition: all 0.2s ease-out;
+  }
+
+  &.slide-enter-active {
+    width: 300px;
+    //transition: all 0.2s ease-out;
+  }
+
+  &.slide-exit {
+    transition: all 0.2s ease-out;
+  }
+
+  &.slide-exit-active {
+    width: 240px;
+  }
 `;
 
 export const Addition = styled.div`
@@ -110,24 +132,6 @@ export const Button = styled.div`
 export const SearchWrapper = styled.div`
   float: left;
   position: relative;
-
-  .slide-enter {
-    width: 300px;
-    transition: all 0.2s ease-out;
-  }
-
-  .slide-enter-done {
-    width: 300px;
-    transition: all 0.2s ease-out;
-  }
-
-  .slide-exit {
-    transition: all 0.2s ease-out;
-  }
-
-  .slide-exit-active {
-    width: 240px;
-  }
 
   .icon-sousuo {
     position: absolute;

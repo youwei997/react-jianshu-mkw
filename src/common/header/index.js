@@ -1,5 +1,7 @@
 import React from "react";
 
+import { connect } from "react-redux";
+
 import {
   HeaderWrapper,
   Logo,
@@ -13,69 +15,80 @@ import {
 } from "./style";
 
 import { CSSTransition } from "react-transition-group";
+import { mapStateToPropsFactory } from "react-redux/es/connect/mapStateToProps";
 
-export default class Header extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      focused: false,
-    };
-    this.handleInputFocus = this.handleInputFocus.bind(this);
-    this.handleInputBlur = this.handleInputBlur.bind(this);
-  }
-  render() {
-    return (
-      <HeaderWrapper>
-        <WidthLimit>
-          <Logo></Logo>
-          <Nav>
-            <NavItem className="left active">首页</NavItem>
-            <NavItem className="left">下载App</NavItem>
-            <NavItem className="right">登录</NavItem>
-            <NavItem className="right">
-              <i className="iconfont icon-font-size"></i>
-            </NavItem>
-            <SearchWrapper>
-              <CSSTransition
-                in={this.state.focused}
-                timeout={200}
-                classNames="slide"
-              >
-                <NavSearch
-                  className={this.state.focused ? "focused" : ""}
-                  onFocus={this.handleInputFocus}
-                  onBlur={this.handleInputBlur}
-                ></NavSearch>
-              </CSSTransition>
-              <i
-                className={
-                  this.state.focused
-                    ? "focused iconfont icon-sousuo"
-                    : "iconfont icon-sousuo"
-                }
-              ></i>
-            </SearchWrapper>
-          </Nav>
-          <Addition>
-            <Button className="writing">
-              <i className="iconfont icon-write"></i>写文章
-            </Button>
-            <Button className="reg">注册</Button>
-          </Addition>
-        </WidthLimit>
-      </HeaderWrapper>
-    );
-  }
+const Header = (props) => {
+  const { focused, handleInputFocus, handleInputBlur } = props;
+  return (
+    <HeaderWrapper>
+      <WidthLimit>
+        <Logo></Logo>
+        <Nav>
+          <NavItem className="left active">首页</NavItem>
+          <NavItem className="left">下载App</NavItem>
+          <NavItem className="right">登录</NavItem>
+          <NavItem className="right">
+            <i className="iconfont icon-font-size"></i>
+          </NavItem>
+          <SearchWrapper>
+            <CSSTransition in={focused} timeout={200} classNames="slide">
+              <NavSearch
+                className={focused ? "focused" : ""}
+                onFocus={handleInputFocus}
+                onBlur={handleInputBlur}
+              ></NavSearch>
+            </CSSTransition>
+            <i
+              className={
+                focused
+                  ? "focused iconfont icon-sousuo"
+                  : "iconfont icon-sousuo"
+              }
+            ></i>
+          </SearchWrapper>
+        </Nav>
+        <Addition>
+          <Button className="writing">
+            <i className="iconfont icon-write"></i>写文章
+          </Button>
+          <Button className="reg">注册</Button>
+        </Addition>
+      </WidthLimit>
+    </HeaderWrapper>
+  );
+};
 
-  // 两个方法控制
-  handleInputFocus() {
-    this.setState({
-      focused: true,
-    });
-  }
-  handleInputBlur() {
-    this.setState({
-      focused: false,
-    });
-  }
-}
+// class Header extends React.Component {
+//   render() {
+//     const { focused, handleInputFocus, handleInputBlur } = this.props;
+//     return (
+//
+//     );
+//   }
+// }
+
+const mapStateToProps = (state) => {
+  // state 就是reducer的state
+  return {
+    ...state,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    handleInputFocus() {
+      const action = {
+        type: "search_focus",
+      };
+      dispatch(action);
+    },
+    handleInputBlur() {
+      const action = {
+        type: "search_blur",
+      };
+      dispatch(action);
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
