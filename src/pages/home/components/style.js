@@ -88,3 +88,14 @@ export const RecommendItem = styled.div`
     ${"" /* background:url(${(props)=>props.ingUlr}) */}
   }
 `;
+
+// writer 样式
+export const WriterWrapper = styled.div`
+  margin-top: 50px;
+  width: 278px;
+  border: 1px solid #ccc;
+  text-align: center;
+  height: 300px;
+  line-height: 300px;
+  border-radius: 4px;
+`;
