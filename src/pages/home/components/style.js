@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const TopicWrapper = styled.div`
   padding: 20px 0 10px 0;
   overflow: hidden;
+  border-bottom: 1px solid #ececec;
 `;
 export const TopicItem = styled.div`
   float: left;
@@ -22,5 +23,56 @@ export const TopicItem = styled.div`
     width: 32px;
     float: left;
     margin-right: 10px;
+  }
+`;
+
+// List样式
+export const ListItem = styled.div`
+  padding: 20px 0;
+  border-bottom: 1px solid #ececec;
+  overflow: hidden;
+
+  > img {
+    display: block;
+    float: right;
+    width: 125px;
+    height: 100px;
+    border-radius: 10px;
+  }
+`;
+
+export const ListInfo = styled.div`
+  width: 500px;
+  float: left;
+  h3 {
+    line-height: 27px;
+    font-size: 18px;
+    color: #333;
+    font-weight: 700;
+    margin-bottom: 7px;
+  }
+  > p {
+    font-size: 13px;
+    line-height: 24px;
+    color: #999;
+    margin-bottom: 7px;
+
+    display: -webkit-box;
+    overflow: hidden; /*超出隐藏*/
+    text-overflow: ellipsis; /*隐藏后添加省略号*/
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2; /*想显示多少行*/
+  }
+`;
+
+export const ListMeta = styled.div`
+  span {
+    color: #b4b4b4;
+    font-size: 12px;
+    margin-right: 15px;
+    i {
+      font-size: 10px;
+      margin-right: 4px;
+    }
   }
 `;
