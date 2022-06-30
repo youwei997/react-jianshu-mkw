@@ -9,9 +9,8 @@ export const HomeLeft = styled.div`
   padding-top: 30px;
   width: 625px;
   margin-left: 15px;
-  height: 300px;
   float: left;
-  img {
+  > img {
     width: 625px;
     height: 270px;
     background-size: cover;
