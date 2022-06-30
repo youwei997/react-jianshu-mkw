@@ -3,7 +3,6 @@ import { ListItem, ListInfo, ListMeta } from "./style";
 import { connect } from "react-redux";
 class List extends React.Component {
   render() {
-    console.log(this.props);
     const { list } = this.props;
     return (
       <div>

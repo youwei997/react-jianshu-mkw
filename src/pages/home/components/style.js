@@ -76,3 +76,15 @@ export const ListMeta = styled.div`
     }
   }
 `;
+
+// recommend 样式
+export const RecommendItem = styled.div`
+  margin-bottom: 8px;
+  img {
+    width: 280px;
+    height: 50px;
+    background-size: contain;
+    ${"" /* 下面这种也可以，必须在标签把url传递进去 */}
+    ${"" /* background:url(${(props)=>props.ingUlr}) */}
+  }
+`;
