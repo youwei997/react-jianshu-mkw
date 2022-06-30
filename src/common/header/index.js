@@ -49,7 +49,7 @@ class Header extends React.Component {
       handleChangePage,
     } = this.props;
     if (focused || mouseIn) {
-      const newList = list.toJS(list);
+      const newList = list.toJS();
       const pageList = [];
       if (newList.length === 0) {
         return;
