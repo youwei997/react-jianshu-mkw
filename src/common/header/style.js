@@ -4,13 +4,16 @@ import logoPic from "../../statics/img/logo.png";
 export const HeaderWrapper = styled.div`
   height: 58px;
   border-bottom: 1px solid #f0f0f0;
+  position: sticky;
+  top: 0;
+  background-color: #fff;
 `;
 
 export const WidthLimit = styled.div`
   margin: 0 auto;
+  height: 100%;
   min-width: 768px;
   max-width: 1440px;
-  position: relative;
 `;
 
 // attrs 在元素上增加属性
