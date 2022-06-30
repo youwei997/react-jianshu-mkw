@@ -4,6 +4,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import Header from "./common/header";
 import store from "./store";
+import Home from "./pages/home/index";
+import Detail from "./pages/detail/index";
 
 class App extends Component {
   render() {
@@ -14,8 +16,8 @@ class App extends Component {
           <Header></Header>
           <BrowserRouter>
             <Routes>
-              <Route path="/" element={<div>home</div>}></Route>
-              <Route path="/detail" element={<div>detail</div>}></Route>
+              <Route path="/" element={<Home></Home>}></Route>
+              <Route path="/detail" element={<Detail></Detail>}></Route>
             </Routes>
           </BrowserRouter>
         </div>
