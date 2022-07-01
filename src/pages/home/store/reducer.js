@@ -1,6 +1,7 @@
 // header reducer 专门对header的数据和操作
 // import * as actionTypes from "./actionTypes";
 import { fromJS } from "immutable";
+import { actionTypes } from "./index";
 const defaultState = fromJS({
   topicList: [],
   articleList: [],
@@ -8,7 +9,7 @@ const defaultState = fromJS({
 });
 const reducer = (state = defaultState, action) => {
   switch (action.type) {
-    case "change_home_data":
+    case actionTypes.CHANGE_HOME_DATA:
       return state.merge({
         topicList: fromJS(action.topicList),
         articleList: fromJS(action.articleList),
