@@ -17,9 +17,7 @@ export const WidthLimit = styled.div`
 `;
 
 // attrs 在元素上增加属性
-export const Logo = styled.a.attrs({
-  href: "/",
-})`
+export const Logo = styled.div`
   height: 56px;
   position: absolute;
   top: 0;
@@ -185,7 +183,7 @@ export const SearchInfoSwitch = styled.span`
     //line-height: 20px;
     font-size: 13px;
     margin-right: 5px;
-    transition: all 0.2s ease-in
+    transition: all 0.2s ease-in;
     //transform: rotate(90deg);
     transform-origin: center center;
   }

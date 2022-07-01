@@ -2,31 +2,34 @@ import React from "react";
 import { ListItem, ListInfo, ListMeta, LoadMore } from "./style";
 import { connect } from "react-redux";
 import { actionCreators } from "../store/index";
-class List extends React.Component {
+import { Link } from "react-router-dom";
+class List extends React.PureComponent {
   render() {
     const { list, getMoreList, page } = this.props;
     return (
       <div>
         {list.map((item) => {
           return (
-            <ListItem key={item.id}>
-              <img alt={item.title} src={item.imgUrl} />
-              <ListInfo>
-                <h3>{item.title}</h3>
-                <p>{item.desc}</p>
-              </ListInfo>
-              <ListMeta>
-                <span>{item.author}</span>
-                <span>
-                  <i className="iconfont icon-pinglun"></i>
-                  {item.commentNum}
-                </span>
-                <span>
-                  <i className="iconfont icon-aixin"></i>
-                  {item.likeNum}
-                </span>
-              </ListMeta>
-            </ListItem>
+            <Link key={item.id} to={"/detail"}>
+              <ListItem>
+                <img alt={item.title} src={item.imgUrl} />
+                <ListInfo>
+                  <h3>{item.title}</h3>
+                  <p>{item.desc}</p>
+                </ListInfo>
+                <ListMeta>
+                  <span>{item.author}</span>
+                  <span>
+                    <i className="iconfont icon-pinglun"></i>
+                    {item.commentNum}
+                  </span>
+                  <span>
+                    <i className="iconfont icon-aixin"></i>
+                    {item.likeNum}
+                  </span>
+                </ListMeta>
+              </ListItem>
+            </Link>
           );
         })}
         <LoadMore

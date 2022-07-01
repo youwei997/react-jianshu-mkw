@@ -7,7 +7,8 @@ import Topic from "./components/Topic";
 import { actionCreators } from "./store/index";
 import { connect } from "react-redux";
 
-class Home extends React.Component {
+// PureComponent比Component性能高
+class Home extends React.PureComponent {
   handleBackTop() {
     window.scrollTo(0, 0);
   }

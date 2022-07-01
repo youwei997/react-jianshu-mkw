@@ -12,15 +12,13 @@ class App extends Component {
     return (
       //  Provider 的子组件都有能力使用store
       <Provider store={store}>
-        <div>
+        <BrowserRouter>
           <Header></Header>
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<Home></Home>}></Route>
-              <Route path="/detail" element={<Detail></Detail>}></Route>
-            </Routes>
-          </BrowserRouter>
-        </div>
+          <Routes>
+            <Route path="/" element={<Home></Home>}></Route>
+            <Route path="/detail" element={<Detail></Detail>}></Route>
+          </Routes>
+        </BrowserRouter>
       </Provider>
     );
   }
