@@ -76,6 +76,17 @@ export const ListMeta = styled.div`
     }
   }
 `;
+export const LoadMore = styled.div`
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+  background-color: #a5a5a5;
+  text-align: center;
+  border-radius: 20px;
+  color: #fff;
+  margin: 30px auto 60px;
+  cursor: pointer;
+`;
 
 // recommend 样式
 export const RecommendItem = styled.div`

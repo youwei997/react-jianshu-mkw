@@ -1,9 +1,10 @@
 import React from "react";
-import { ListItem, ListInfo, ListMeta } from "./style";
+import { ListItem, ListInfo, ListMeta, LoadMore } from "./style";
 import { connect } from "react-redux";
+import { actionCreators } from "../store/index";
 class List extends React.Component {
   render() {
-    const { list } = this.props;
+    const { list, getMoreList, page } = this.props;
     return (
       <div>
         {list.map((item) => {
@@ -28,6 +29,13 @@ class List extends React.Component {
             </ListItem>
           );
         })}
+        <LoadMore
+          onClick={() => {
+            getMoreList(page);
+          }}
+        >
+          阅读更多
+        </LoadMore>
       </div>
     );
   }
@@ -36,11 +44,17 @@ class List extends React.Component {
 const mapStateToProps = (state) => {
   return {
     list: state.get("home").get("articleList").toJS(),
+    page: state.get("home").get("articleListPage"),
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return {};
+  return {
+    getMoreList(page) {
+      page += 1;
+      dispatch(actionCreators.getMoreList(page));
+    },
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(List);

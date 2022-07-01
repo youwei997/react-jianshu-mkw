@@ -6,6 +6,7 @@ const defaultState = fromJS({
   topicList: [],
   articleList: [],
   recommendList: [],
+  articleListPage: 1,
 });
 const reducer = (state = defaultState, action) => {
   switch (action.type) {
@@ -14,6 +15,14 @@ const reducer = (state = defaultState, action) => {
         topicList: fromJS(action.topicList),
         articleList: fromJS(action.articleList),
         recommendList: fromJS(action.recommendList),
+      });
+    case actionTypes.ADD_HOME_LIST:
+      const list = fromJS(action.list);
+      const articleList = state.get("articleList").concat(list);
+      const nextPage = action.nextPage;
+      return state.merge({
+        articleList: articleList,
+        articleListPage: nextPage,
       });
     default:
       return state;
