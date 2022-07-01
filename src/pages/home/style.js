@@ -24,3 +24,15 @@ export const HomeRight = styled.div`
   padding-top: 30px;
   float: right;
 `;
+
+export const BackTop = styled.div`
+  position: fixed;
+  width: 50px;
+  height: 50px;
+  bottom: 40px;
+  right: 40px;
+  line-height: 60px;
+  text-align: center;
+  border: 1px solid #dcdcdc;
+  background-color: #fff;
+`;

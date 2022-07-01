@@ -36,3 +36,10 @@ export const getMoreList = (page) => {
     });
   };
 };
+
+export const toggleTopShow = (show) => {
+  return {
+    type: actionTypes.TOGGLE_SCROLL_SHOW,
+    show,
+  };
+};

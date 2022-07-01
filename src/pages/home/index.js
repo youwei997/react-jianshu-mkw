@@ -1,5 +1,5 @@
 import React from "react";
-import { HomeWrapper, HomeLeft, HomeRight } from "./style";
+import { HomeWrapper, HomeLeft, HomeRight, BackTop } from "./style";
 import List from "./components/List";
 import Recommend from "./components/Recommend";
 import Writer from "./components/Writer";
@@ -8,7 +8,11 @@ import { actionCreators } from "./store/index";
 import { connect } from "react-redux";
 
 class Home extends React.Component {
+  handleBackTop() {
+    window.scrollTo(0, 0);
+  }
   render() {
+    const { showBackTop } = this.props;
     return (
       <HomeWrapper>
         <HomeLeft>
@@ -25,14 +29,30 @@ class Home extends React.Component {
           <Recommend></Recommend>
           <Writer></Writer>
         </HomeRight>
+        {showBackTop ? <BackTop onClick={this.handleBackTop}>^</BackTop> : ""}
       </HomeWrapper>
     );
   }
 
   componentDidMount() {
     this.props.changeHomeData();
+    this.bindEvents();
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("scroll", this.props.changeBackTopShow);
+  }
+
+  bindEvents() {
+    window.addEventListener("scroll", this.props.changeBackTopShow);
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    showBackTop: state.get("home").get("showBackTop"),
+  };
+};
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -40,7 +60,15 @@ const mapDispatchToProps = (dispatch) => {
       const action = actionCreators.getHomeInfo();
       dispatch(action);
     },
+    changeBackTopShow() {
+      const scrollTop = document.documentElement.scrollTop;
+      if (scrollTop > 200) {
+        dispatch(actionCreators.toggleTopShow(true));
+      } else {
+        dispatch(actionCreators.toggleTopShow(false));
+      }
+    },
   };
 };
 
-export default connect(null, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
