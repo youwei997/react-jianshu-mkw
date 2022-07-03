@@ -13,7 +13,7 @@ class Home extends React.PureComponent {
     window.scrollTo(0, 0);
   }
   render() {
-    const { showBackTop } = this.props;
+    const { showBackTop, writerList } = this.props;
     return (
       <HomeWrapper>
         <HomeLeft>
@@ -28,7 +28,7 @@ class Home extends React.PureComponent {
         </HomeLeft>
         <HomeRight>
           <Recommend></Recommend>
-          <Writer></Writer>
+          {writerList.size ? <Writer></Writer> : null}
         </HomeRight>
         {showBackTop ? <BackTop onClick={this.handleBackTop}>^</BackTop> : ""}
       </HomeWrapper>
@@ -37,6 +37,7 @@ class Home extends React.PureComponent {
 
   componentDidMount() {
     this.props.changeHomeData();
+    this.props.getWriterList();
     this.bindEvents();
   }
 
@@ -51,12 +52,16 @@ class Home extends React.PureComponent {
 
 const mapStateToProps = (state) => {
   return {
+    writerList: state.getIn(["home", "writerList"]),
     showBackTop: state.get("home").get("showBackTop"),
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    getWriterList() {
+      dispatch(actionCreators.getWriterList());
+    },
     changeHomeData() {
       const action = actionCreators.getHomeInfo();
       dispatch(action);

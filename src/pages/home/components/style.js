@@ -103,10 +103,78 @@ export const RecommendItem = styled.div`
 // writer 样式
 export const WriterWrapper = styled.div`
   margin-top: 50px;
-  width: 278px;
-  border: 1px solid #ccc;
-  text-align: center;
-  height: 300px;
-  line-height: 300px;
-  border-radius: 4px;
+  .top {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    color: #969696;
+
+    .switch {
+      cursor: pointer;
+      .icon-spin {
+        display: block;
+        float: left;
+        //height: 20px;
+        //width: 20px;
+        //text-align: center;
+        //line-height: 20px;
+        font-size: 13px;
+        margin-right: 5px;
+        transition: all 0.2s ease-in;
+        //transform: rotate(90deg);
+        transform-origin: center center;
+      }
+    }
+  }
+  .info {
+    .info-item {
+      margin-top: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .follow {
+        margin-top: 5px;
+        padding: 0;
+        font-size: 13px;
+        color: #42c02e;
+      }
+      .author {
+        flex: 1;
+        .authorName {
+          font-size: 14px;
+          display: block;
+          color: #2f2f2f;
+        }
+        .authorWriter {
+          margin-top: 8px;
+          font-size: 12px;
+          color: #969696;
+        }
+      }
+      img {
+        width: 48px;
+        height: 48px;
+        margin-right: 10px;
+        display: block;
+        cursor: pointer;
+        border: 1px solid #ddd;
+        border-radius: 50%;
+      }
+    }
+  }
+  .more {
+    //padding: 7px 7px 7px 12px;
+    margin-top: 15px;
+    box-sizing: border-box;
+    width: 100%;
+    font-size: 13px;
+    color: #787878;
+    background-color: #f7f7f7;
+    border: 1px solid #dcdcdc;
+    border-radius: 4px;
+    text-align: center;
+    height: 35px;
+    line-height: 33px;
+  }
 `;
