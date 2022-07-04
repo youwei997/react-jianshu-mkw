@@ -142,9 +142,11 @@ class Header extends React.Component {
             </SearchWrapper>
           </Nav>
           <Addition>
-            <Button className="writing">
-              <i className="iconfont icon-write"></i>写文章
-            </Button>
+            <Link to={"/write"}>
+              <Button className="writing">
+                <i className="iconfont icon-write"></i>写文章
+              </Button>
+            </Link>
             {login ? (
               <img alt={""} src={userInfo.headUrl} className={"headUrl"} />
             ) : (

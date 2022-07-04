@@ -7,6 +7,7 @@ import store from "./store";
 import Home from "./pages/home/index";
 import Detail from "./pages/detail/index";
 import Login from "./pages/login";
+import Write from "./pages/write";
 
 class App extends Component {
   render() {
@@ -22,6 +23,7 @@ class App extends Component {
             {/*参数路由*/}
             {/*<Route path="/detail" element={<Detail></Detail>}></Route>*/}
             <Route path="/login" element={<Login></Login>}></Route>
+            <Route path="/write" element={<Write></Write>}></Route>
           </Routes>
         </BrowserRouter>
       </Provider>

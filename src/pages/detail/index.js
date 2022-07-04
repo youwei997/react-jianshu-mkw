@@ -6,7 +6,6 @@ import withRouter from "../../hook/withRouter";
 
 class Detail extends React.Component {
   render() {
-    console.log(this.props);
     const { title, content } = this.props;
     return (
       <DetailWrapper>

@@ -16,7 +16,6 @@ class Login extends React.Component {
     const { login, handleLogin, changeUsernameInput, changePasswordInput } =
       this.props;
     const { username, password } = this.state;
-    console.log(login);
     if (login) {
       return <Navigate to="/"></Navigate>;
     }
