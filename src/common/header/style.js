@@ -102,6 +102,12 @@ export const Addition = styled.div`
   right: 30px;
   top: 0;
   height: 56px;
+  .headUrl {
+    margin-top: 8px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
 `;
 
 export const Button = styled.div`

@@ -22,6 +22,7 @@ import { Link } from "react-router-dom";
 
 import { CSSTransition } from "react-transition-group";
 import { actionCreators } from "./store";
+import { actionCreators as loginActionCreators } from "../../pages/login/store";
 
 // const Header = (props) => {
 //   const { focused, handleInputFocus, handleInputBlur } = props;
@@ -88,7 +89,15 @@ class Header extends React.Component {
   }
   render() {
     const { getListArea } = this;
-    const { focused, handleInputFocus, handleInputBlur, list } = this.props;
+    const {
+      focused,
+      handleInputFocus,
+      handleInputBlur,
+      list,
+      login,
+      userInfo,
+      logout,
+    } = this.props;
     return (
       <HeaderWrapper>
         <WidthLimit>
@@ -100,7 +109,15 @@ class Header extends React.Component {
               <NavItem className="left active">首页</NavItem>
             </Link>
             <NavItem className="left">下载App</NavItem>
-            <NavItem className="right">登录</NavItem>
+            {login ? (
+              <NavItem className="right" onClick={logout}>
+                退出
+              </NavItem>
+            ) : (
+              <Link to={"/login"}>
+                <NavItem className="right">登录</NavItem>
+              </Link>
+            )}
             <NavItem className="right">
               <i className="iconfont icon-font-size"></i>
             </NavItem>
@@ -128,7 +145,13 @@ class Header extends React.Component {
             <Button className="writing">
               <i className="iconfont icon-write"></i>写文章
             </Button>
-            <Button className="reg">注册</Button>
+            {login ? (
+              <img alt={""} src={userInfo.headUrl} className={"headUrl"} />
+            ) : (
+              <Link to={"/login"}>
+                <Button className="reg">注册</Button>
+              </Link>
+            )}
           </Addition>
         </WidthLimit>
       </HeaderWrapper>
@@ -148,6 +171,8 @@ const mapStateToProps = (state) => {
     page: state.getIn(["header", "page"]),
     mouseIn: state.getIn(["header", "mouseIn"]),
     totalPages: state.get("header").get("totalPages"),
+    login: state.get("login").get("login"),
+    userInfo: state.get("login").get("userInfo").toJS(),
   };
 };
 
@@ -176,6 +201,9 @@ const mapDispatchToProps = (dispatch) => {
       });
       let currentPage = page === totalPages ? 1 : page + 1;
       dispatch(actionCreators.getChangePageAction(currentPage));
+    },
+    logout() {
+      dispatch(loginActionCreators.logout());
     },
   };
 };
