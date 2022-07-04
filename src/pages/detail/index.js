@@ -2,7 +2,7 @@ import React from "react";
 import { DetailWrapper, Header, Content } from "./style";
 import { connect } from "react-redux";
 import { actionCreators } from "./store/index";
-import withRouter from "./withRouter";
+import withRouter from "../../hook/withRouter";
 
 class Detail extends React.Component {
   render() {

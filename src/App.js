@@ -6,6 +6,7 @@ import Header from "./common/header";
 import store from "./store";
 import Home from "./pages/home/index";
 import Detail from "./pages/detail/index";
+import Login from "./pages/login";
 
 class App extends Component {
   render() {
@@ -20,6 +21,7 @@ class App extends Component {
             <Route path="/detail/:id" element={<Detail></Detail>}></Route>
             {/*参数路由*/}
             {/*<Route path="/detail" element={<Detail></Detail>}></Route>*/}
+            <Route path="/login" element={<Login></Login>}></Route>
           </Routes>
         </BrowserRouter>
       </Provider>
