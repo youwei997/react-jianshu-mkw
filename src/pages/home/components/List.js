@@ -10,7 +10,7 @@ class List extends React.PureComponent {
       <div>
         {list.map((item) => {
           return (
-            <Link key={item.id} to={"/detail"}>
+            <Link key={item.id} to={"/detail/" + item.id}>
               <ListItem>
                 <img alt={item.title} src={item.imgUrl} />
                 <ListInfo>

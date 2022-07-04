@@ -16,7 +16,10 @@ class App extends Component {
           <Header></Header>
           <Routes>
             <Route path="/" element={<Home></Home>}></Route>
-            <Route path="/detail" element={<Detail></Detail>}></Route>
+            {/*动态路由接收参数*/}
+            <Route path="/detail/:id" element={<Detail></Detail>}></Route>
+            {/*参数路由*/}
+            {/*<Route path="/detail" element={<Detail></Detail>}></Route>*/}
           </Routes>
         </BrowserRouter>
       </Provider>
