@@ -1,6 +1,7 @@
 import React from "react";
 import { DetailWrapper, Header, Content } from "./style";
 import { connect } from "react-redux";
+import { actionCreators } from "./store/index";
 
 class Detail extends React.Component {
   render() {
@@ -12,6 +13,10 @@ class Detail extends React.Component {
       </DetailWrapper>
     );
   }
+
+  componentDidMount() {
+    this.props.getDetail();
+  }
 }
 
 const mapStateToProps = (state) => {
@@ -20,4 +25,12 @@ const mapStateToProps = (state) => {
     content: state.getIn(["detail", "content"]),
   };
 };
-export default connect(mapStateToProps, null)(Detail);
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getDetail() {
+      dispatch(actionCreators.getDetail());
+    },
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Detail);
